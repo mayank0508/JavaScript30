@@ -6,52 +6,68 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="key">
+    <div class="keys">
       <div data-key="65" class="key">
         <kbd>A</kbd><span class="sound">clap</span>
       </div>
-        <div data-key="83" class="key">
-          <kbd>S</kbd><span class="sound">hihat/span>
-        </div>
-        <div data-key="68" class="key">
-          <kbd>D</kbd><span class="sound">kick</span>
-        </div>
-        <div data-key="70" class="key">
-          <kbd>F</kbd><span class="sound">openhat</span>
-        </div>
-        <div data-key="71" class="key">
-          <kbd>G</kbd><span class="sound">boom</span>
-        </div>
-        <div data-key="72" class="key">
-          <kbd>H</kbd><span class="sound">ride</span>
-        </div>
-        <div data-key="74" class="key">
-          <kbd>J</kbd><span class="sound">snare</span>
-        </div>
-        <div data-key="75" class="key">
-          <kbd>K</kbd><span class="sound">tom</span>
-        </div>
-        <div data-key="76" class="key">
-          <kbd>L</kbd><span class="sound">tink</span>
-        </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd><span class="sound">hihat</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd><span class="sound">kick</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd><span class="sound">openhat</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd><span class="sound">boom</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd><span class="sound">ride</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd><span class="sound">snare</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd><span class="sound">tom</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd><span class="sound">tink</span>
+      </div>
     </div>
 
-    <audio data-key='83' src="sounds/hihat.wav"></audio>
-    <audio data-key='68' src="sounds/kick.wav"></audio>
-    <audio data-key='65' src="sounds/clap.wav"></audio>
-    <audio data-key='70' src="sounds/openhat.wav"></audio>
-    <audio data-key='71' src="sounds/boom.wav"></audio>
-    <audio data-key='72' src="sounds/ride.wav"></audio>
-    <audio data-key='74' src="sounds/snare.wav"></audio>
-    <audio data-key='75' src="sounds/tom.wav"></audio>
-    <audio data-key='76' src="sounds/tink.wav"></audio>
-
+    <audio data-key="83" src="sounds/hihat.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="70" src="sounds/openhat.wav"></audio>
+    <audio data-key="71" src="sounds/boom.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="74" src="sounds/snare.wav"></audio>
+    <audio data-key="75" src="sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/tink.wav"></audio>
 
     <script>
-      window.addEventListener('keydown', function(e) {
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      window.addEventListener('keydown', function (e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); // selects the audio key
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return; // this stops the function if the desired key is nor pressed
+        audio.currentTime = 0; // it helps in banging the key over and over again !!
+        audio.play();
+        key.classList.add('playing'); // it add that particular class in the project
       });
+
+      function removeTransition(e) {
+        if (e.propertyName !== 'transform') return; // skip it if its not transform
+        this.classList.remove('playing');
+      }
+
+      // this. is always equivalent to the the thing that got called aginst it ~ wesBos 👨‍💻
+
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(
+        key => key.addEventListener('transitionend', removeTransition) // what is happening here is that, the
+        // transitionend is being applied to all the keys and then a function  is passed called removeTransition
+      );
     </script>
-  
-</body>
+  </body>
 </html>
