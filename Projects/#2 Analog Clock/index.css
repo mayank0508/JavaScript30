@@ -1,5 +1,5 @@
 html {
-  background: #018ded url(https://unsplash.it/1500/1000?image=881&blur=5);
+  background: #ffffff url(https://images.unsplash.com/photo-1600426018917-6e038a29b154?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);
   background-size: cover;
   font-family: 'helvetica neue';
   text-align: center;
@@ -18,7 +18,7 @@ body {
 .clock {
   width: 30rem;
   height: 30rem;
-  border: 10px dashed white;
+  border: 10px dashed rgba(103, 163, 219, 0.74);
   border-radius: 50%;
   margin: 50px auto;
   position: relative;
@@ -37,7 +37,7 @@ body {
 .hand {
   width: 50%;
   height: 2px;
-  background: black;
+  background: rgb(179, 255, 0);
   position: absolute;
   top: 50%;
   transform-origin: right; /* this makes the clock hands rotate on their axis */
