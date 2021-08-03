@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Clock</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+    <script>
+      const secondHand = document.querySelector('.second-hand');
+      const minuteHand = document.querySelector('.min-hand');
+      const hourHand = document.querySelector('.hour-hand');
+
+      const setDate = () => {
+        const date = new Date(); // this fetches the date !!
+        const second = date.getSeconds(); // this fetches the second
+        const secondDegree = (second / 60) * 360 + 90; // this gives us the second degree
+        secondHand.style.transform = `rotate(${secondDegree}deg)`; // this makes the second hand move
+        // TODO: to remove the second hand bug
+
+        const minute = date.getMinutes(); // this fetches the minutes
+        const minuteDegree = (minute / 60) * 360 + 90; // this gives us the minute degree
+        minuteHand.style.transform = `rotate(${minuteDegree}deg)`; // this makes the minute hand move
+
+        const hour = date.getHours(); // this fetches the hour
+        const hourDegree = (hour / 12) * 360 + 90; // this gives us the hour degree
+        hourHand.style.transform = `rotate(${hourDegree}deg)`; // this makes the hour hand move
+      };
+      setInterval(setDate, 1000); // this is the interval that will every 1000 milliseconds
+    </script>
+  </body>
+</html>

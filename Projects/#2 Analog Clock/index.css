@@ -1,0 +1,61 @@
+html {
+  background: #018ded url(https://unsplash.it/1500/1000?image=881&blur=5);
+  background-size: cover;
+  font-family: 'helvetica neue';
+  text-align: center;
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  font-size: 2rem;
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.clock {
+  width: 30rem;
+  height: 30rem;
+  border: 10px dashed white;
+  border-radius: 50%;
+  margin: 50px auto;
+  position: relative;
+  padding: 2rem;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
+    inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-3px); /* account for the height of the clock hands */
+}
+
+.hand {
+  width: 50%;
+  height: 2px;
+  background: black;
+  position: absolute;
+  top: 50%;
+  transform-origin: right; /* this makes the clock hands rotate on their axis */
+  transform: rotate(
+    90deg
+  ); /* this makes the cloxk hand show at 12 ie at the top, other wise they will be at the left side */
+  transition-timing-function: cubic-bezier(.09,2.13,1,1);
+  transition: all 0.5s;
+}
+
+.hour-hand {
+    background-color: antiquewhite;
+    width: 50%;
+    height: 10px;
+}
+
+.min-hand {
+    background-color: aqua;
+    width: 50%;
+    height: 5px;
+}
