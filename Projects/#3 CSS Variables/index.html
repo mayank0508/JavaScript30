@@ -31,7 +31,7 @@
         data-sizing="px"
       />
 
-      <label for="base">Base Color</label>
+      <label for="base">Base Color: </label>
       <input id="base" type="color" name="base" value="#ffc600" />
       <!--this is the how to color palette is brought to the page -->
     </div>
@@ -43,14 +43,15 @@
     <script>
       const input = document.querySelectorAll('.controls input'); // it selects all the input fields in the control class div
 
-      const handleUpdate = () => {
+      function handleUpdate() {
+        // doubt here when i am using the ES6 way its not working but the other way it is working
         // console.log(this.value); // this here console.logs the value of the control input
         const suffix = this.dataset.sizing || ''; // this will access all the suffixes in dataset ie data-sizing or any other data- check wesbos ep3 for more info
         document.documentElement.style.setProperty(
-          `${this.name}`,
+          `--${this.name}`,
           this.value + suffix
         );
-      };
+      }
 
       input.forEach(input => input.addEventListener('change', handleUpdate)); // this here loops through the input and the add event listener when there is a change in the input
       input.forEach(input => input.addEventListener('mousemove', handleUpdate)); // this here loops through the input and the add event listener when there is a mouse move in the input
