@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Scoped CSS Variables and JS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
+
+    <div class="controls">
+      <label for="spacing">Spacing:</label>
+      <input
+        id="spacing"
+        type="range"
+        name="spacing"
+        min="10"
+        max="200"
+        value="10"
+        data-sizing="px"
+      />
+
+      <label for="blur">Blur:</label>
+      <input
+        id="blur"
+        type="range"
+        name="blur"
+        min="0"
+        max="25"
+        value="10"
+        data-sizing="px"
+      />
+
+      <label for="base">Base Color</label>
+      <input id="base" type="color" name="base" value="#ffc600" />
+      <!--this is the how to color palette is brought to the page -->
+    </div>
+
+    <img
+      src="https://images.unsplash.com/photo-1611505103377-ef7ff5eaf03c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"
+    />
+
+    <script>
+      const input = document.querySelectorAll('.controls input'); // it selects all the input fields in the control class div
+
+      const handleUpdate = () => {
+        // console.log(this.value); // this here console.logs the value of the control input
+        const suffix = this.dataset.sizing || ''; // this will access all the suffixes in dataset ie data-sizing or any other data- check wesbos ep3 for more info
+        document.documentElement.style.setProperty(
+          `${this.name}`,
+          this.value + suffix
+        );
+      };
+
+      input.forEach(input => input.addEventListener('change', handleUpdate)); // this here loops through the input and the add event listener when there is a change in the input
+      input.forEach(input => input.addEventListener('mousemove', handleUpdate)); // this here loops through the input and the add event listener when there is a mouse move in the input
+    </script>
+  </body>
+</html>
