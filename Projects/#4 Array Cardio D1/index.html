@@ -105,14 +105,33 @@
       console.log(total);
 
       // 5. Sort the inventors by years lived
+      const yearlived = inventors.sort(function (a, b) {
+        first = a.passed - a.year;
+        last = b.passed - b.year;
+        return first > last ? -1 : 1;
+      });
+      console.table(yearlived);
 
-      // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+      //  6. create a list of Boulevards in Paris that contain 'de' anywhere in the name /*THIS IS A GOOD ONE*/
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+      // const DEFAULT = document.querySelector('.mw-category'); // here DEFAULT has been used to select a particular class which has the .mw-category
+      // const link = Array.from(DEFAULT.querySelectorAll('a')); // here form the default we are selecting the links and then converting them to a arrays from node list
+      // const de = link.map(links => links.textContent); // it converts all the links into strings
+      // const streetName = de.filter(streets => streets.includes('de')); // it filters all the strings into strings that only contain de
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
 
+      const peoples = people.sort(function (a, b) {
+        const [afirst, alast] = a.split(', ');
+        const [bfirst, blast] = b.split(', ');
+        return afirst > bfirst ? 1 : -1;
+      });
+      console.log(peoples);
+
       // 8. Reduce Exercise
+
       // Sum up the instances of each of these
       const data = [
         'car',
@@ -130,6 +149,16 @@
         'car',
         'truck'
       ];
+
+      const sumup = data.reduce(function (sum, name) {
+        if (!sum[name]) {
+          sum[name] = 0;
+        }
+        sum[name]++;
+        return sum;
+      }, {});
+
+      console.log(sumup);
     </script>
   </body>
 </html>
