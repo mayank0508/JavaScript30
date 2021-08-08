@@ -13,32 +13,52 @@
   <body>
     <div class="panels">
       <div class="panel panel1">
-        <p>Hey</p>
-        <p>Let's</p>
-        <p>Dance</p>
+        <p>No</p>
+        <p>One</p>
+        <p>Will</p>
       </div>
       <div class="panel panel2">
-        <p>Give</p>
-        <p>Take</p>
-        <p>Receive</p>
+        <p>Ever</p>
+        <p>Come</p>
+        <p>Close</p>
       </div>
       <div class="panel panel3">
-        <p>Experience</p>
-        <p>It</p>
-        <p>Today</p>
+        <p>To The</p>
+        <p>Greatest</p>
+        <p>Footballer</p>
       </div>
       <div class="panel panel4">
-        <p>Give</p>
-        <p>All</p>
-        <p>You can</p>
+        <p>Ever To</p>
+        <p>Have</p>
+        <p>Ever Played</p>
       </div>
       <div class="panel panel5">
-        <p>Life</p>
-        <p>In</p>
-        <p>Motion</p>
+        <p>This</p>
+        <p>Game</p>
+        <p>M E S S I</p>
       </div>
     </div>
 
-    <script></script>
+    <script>
+      const panels = document.querySelectorAll('.panel'); // selects all the panels
+
+      function toggleOpen() {
+        // toggle when the panel to open
+        this.classList.toggle('open');
+      }
+
+      function toggleEnd(e) {
+        // toggle when the panel to closes
+        if (e.propertyName.includes('flex')) {
+          this.classList.toggle('open-active');
+        }
+      }
+
+      panels.forEach(panel => panel.addEventListener('click', toggleOpen)); // here we are not using the toggleOpen() method because it will be called in
+      //the page reload time we dont want that , so we will link the function when the the pannels are clicked
+      panels.forEach(
+        panel => panel.addEventListener('transitionend', toggleEnd) // we are endling the transition event in this way
+      );
+    </script>
   </body>
 </html>
