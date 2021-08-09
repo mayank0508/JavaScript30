@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="search-form">
+      <input type="text" class="search" placeholder="City or State" />
+      <ul class="suggestions">
+        <li>Filter for a city</li>
+        <li>or a state</li>
+      </ul>
+    </form>
+    <script>
+      const endpoint =
+        'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+      const cities = [];
+      fetch(endpoint) // we are fetching the data from the database
+        .then(blob => blob.json()) // then we are converting the data into JSON
+        // .then(data => console.log(data)); // then we return the converted data in the console.log
+        .then(data => cities.push(...data)); // then we return the data in the cities array,
+      // here we used the spread operator i.e [...data], becuase by doing it we will avoiding nesting of the cities
+
+      function findMatch(wordToMatch, cities) {
+        return cities.filter(place => {
+          //here we need to figure out that the word to match is there or not
+          const regex = new RegExp(wordToMatch, 'gi'); // go and check that tutorial once agian
+          return place.city.match(regex) || place.state.match(regex);
+        });
+      }
+
+      function numberWithCommas(x) {
+        x = x.toString(); // this function adds commas to a number(STACKOVERFLOW)
+        var pattern = /(-?\d+)(\d{3})/;
+        while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+        return x;
+      }
+
+      function displayMatches() {
+        const matchArray = findMatch(this.value, cities); // find the matching data
+        const html = matchArray
+          .map(place => {
+            const regex = new RegExp(this.value, 'gi');
+            const cityName = place.city.replace(
+              regex,
+              `<span class="hl">${this.value}</span>` // here what happens is that we replace the words found by the regex with highlighted
+            );
+            const stateName = place.state.replace(
+              regex,
+              `<span class="hl">${this.value}</span>` // here what happens is that we replace the words found by the regex with highlighted
+            );
+            return `
+          <li>
+            <span class="name">${cityName}, ${stateName}}</span>
+            <span class="population">${numberWithCommas(
+              place.population
+            )}</span>
+            </li>
+        `;
+          })
+          .join(''); // here this join will turn the array returned form the map to a strings
+        suggestions.innerHTML = html;
+      }
+
+      const searchInput = document.querySelector('.search');
+      const suggestions = document.querySelector('.suggestions');
+
+      searchInput.addEventListener('change', displayMatches);
+      searchInput.addEventListener('keyup', displayMatches);
+    </script>
+  </body>
+</html>
