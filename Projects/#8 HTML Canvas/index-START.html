@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML5 Canvas</title>
+  </head>
+  <body>
+    <canvas id="draw" width="800" height="800"></canvas>
+    <script>
+      const canvas = document.querySelector('#draw'); // this selects the canvas element
+      const ctx = canvas.getContext('2d'); // context to draw a drawing on a particular plane
+      canvas.width = window.innerWidth; // this makes the canvas of the windows width
+      canvas.height = window.innerHeight; // this makes the canvas of the windows height
+      ctx.strokeStyle = '#BADA55';
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      let isDrawing = false; // this makes the machine know that drawing is not working
+      let lastX = 0; // this gives us the x cordinate
+      let lastY = 0; // this gives us the y cordinate
+
+      function draw(e) {
+        // this is a function that tells us abot the state of the drawing function
+        if (!isDrawing) return; // this stops the function from running when they are mouse down
+        console.log(e);
+      }
+
+      canvas.addEventListener('mousemove', draw); // here i am not declaring the draw() function because i dont want to call it in the refresh
+      canvas.addEventListener('mouseup', () => (isDrawing = false)); // here the function tells us that the mouse is up and which means we cant draw
+      canvas.addEventListener('mousedown', () => (isDrawing = true)); // here the function tells us that the mouse is down and which means we can draw
+    </script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>
