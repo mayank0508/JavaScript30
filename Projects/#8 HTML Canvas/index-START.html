@@ -23,11 +23,22 @@
         // this is a function that tells us abot the state of the drawing function
         if (!isDrawing) return; // this stops the function from running when they are mouse down
         console.log(e);
+        ctx.beginPath(); // this tells the drawing function start drawing
+        ctx.moveTo(lastX, lastY); // this tells the drawing function start point
+        ctx.lineTo(e.offsetX, e.offsetY); // this tells the drawing function go to point
+        ctx.stroke();
+        // lastX = e.offsetX;
+        // lastY = e.offsetY;
+        [lastX, lastY] = [e.offsetX, e.offsetY]; // this es6 destrucuting !!
       }
 
+      canvas.addEventListener('mousedown', e => {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY]; // this tells the function about the current mouse position and helps the function to draw properly
+      }); // here the function tells us that the mouse is down and which means we can draw
       canvas.addEventListener('mousemove', draw); // here i am not declaring the draw() function because i dont want to call it in the refresh
       canvas.addEventListener('mouseup', () => (isDrawing = false)); // here the function tells us that the mouse is up and which means we cant draw
-      canvas.addEventListener('mousedown', () => (isDrawing = true)); // here the function tells us that the mouse is down and which means we can draw
+      canvas.addEventListener('mouseout', () => (isDrawing = false)); // here the function tells us that the mouse is out and which means we cant draw
     </script>
 
     <style>
